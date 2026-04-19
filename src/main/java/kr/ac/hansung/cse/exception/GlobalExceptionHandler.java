@@ -114,4 +114,14 @@ public class GlobalExceptionHandler {
         model.addAttribute("errorDetail", "잠시 후 다시 시도해 주세요. 문제가 지속되면 관리자에게 문의하세요.");
         return "error";
     }
+
+    @ExceptionHandler(DuplicateCategoryException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public String handleProductNotFoundException(DuplicateCategoryException ex, Model model) {
+        model.addAttribute("errorCode", "500");
+        model.addAttribute("errorTitle", "데이터베이스 오류");
+        model.addAttribute("errorMessage", "데이터베이스 처리 중 오류가 발생했습니다.");
+        model.addAttribute("errorDetail", "잠시 후 다시 시도해 주세요. 문제가 지속되면 관리자에게 문의하세요.");
+        return "error";
+    }
 }
